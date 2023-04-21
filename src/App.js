@@ -25,86 +25,134 @@
   
 
 */
-import {useState} from 'react'
-import LoadingSpinner from './components/LoadingSpinner'
-export default function App(){
-const[data,setData] = useState([])
-const [country,setCountry] = useState('United+States')
-const [isLoading, setIsLoading] = useState(false);
+import { useState } from "react";
+import LoadingSpinner from "./components/LoadingSpinner";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+
+export default function App() {
+  const [data, setData] = useState([]);
+  const [country, setCountry] = useState("United+States");
+  const [isLoading, setIsLoading] = useState(false);
   /**
    * 
   http://universities.hipolabs.com/search?country=United+States
 https://dog.ceo/api/breeds/image/random
 
    */
-function clickHandler(){
-  //adding spinner before loading
-  setIsLoading(true);
+  function clickHandler() {
+    //adding spinner before loading
+    setIsLoading(true);
 
-  console.log('clicked the button');
-  console.log('country',country);
-  fetch(`http://universities.hipolabs.com/search?country=${country}`)
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(
-        `This is an HTTP error: The status is ${response.status}`
-      );
+    console.log("clicked the button");
+    console.log("country", country);
+    fetch(`http://universities.hipolabs.com/search?country=${country}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `This is an HTTP error: The status is ${response.status}`
+          );
+        }
+        return response.json();
+      })
+      .then((actualData) => {
+        console.log(actualData);
+        setData(actualData);
+        //stopping spinner after getting data
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setData([]);
+        setIsLoading(false);
+      })
+      .finally(() => {});
+  }
 
-    }
-    return response.json();
-  })
-  .then((actualData) => {
-    console.log(actualData);
-      setData(actualData);
-     //stopping spinner after getting data
-      setIsLoading(false);
-  })
-  .catch((err) => {
+  function clearData() {
     setData([]);
-    setIsLoading(false);
+  }
 
-  })
-  .finally(() => {
-  });
- 
-
-}
-
-function clearData(){
-  setData([]);
-}
-
-var headingStyle = {
-      padding:'25px',
-      backgroundColor:'orange'
-    };
-  return (<div>
-    {isLoading ? <LoadingSpinner /> : []}
-
-    <h1 style={headingStyle}>Universities in {country === 'United+States' ? 'USA' :country }</h1>
-    <button style={{backgroundColor : 'purple',padding: '10px',color:'white'}} onClick={clickHandler}>Get all Universities in {country === 'United+States' ? 'USA' :country }</button> &nbsp; 
-    <button style={{color:'white',padding:'10px',backgroundColor:'red'}} onClick={clearData}>Clear</button>&nbsp; 
-    <select value={country} name="countries" id="countries" style={{color:'white',padding:'10px',backgroundColor:'grey'}} 
-    onChange={e  => setCountry(e.target.value) }
-    >
-        <option value="United+States">USA</option>
-        <option value="India">India</option>
-        <option value="Canada">Canada</option>
-        <option value="Australia">Australia</option>
-        <option value="China">China</option>
-
-    </select >
-
-    {data.slice(0,1000).map(({name,country,domains,web_pages}) => (
+  return (
+    <div>
+      {isLoading ? <LoadingSpinner /> : []}
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Universities in {country === "United+States" ? "USA" : country}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <Button variant="outlined" onClick={clickHandler}>
+        Get all Universities in {country === "United+States" ? "USA" : country}
+      </Button>{" "}
+      &nbsp;
+      <Button variant="outlined" onClick={clearData}>
+        Clear
+      </Button>
+      &nbsp;
+      <Select
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+        labelId="demo-simple-select-standard-label"
+        id="demo-simple-select-standard"
+        label="Country"
+      >
+        <MenuItem value={"United+States"}>USA</MenuItem>
+        <MenuItem value={"India"}>India</MenuItem>
+        <MenuItem value={"Canada"}>Canada</MenuItem>
+        <MenuItem value={"Australia"}>Australia</MenuItem>
+        <MenuItem value={"China"}>China</MenuItem>
+      </Select>
       <div>
-        <ul key={name}>        
-        <h4 style={{color: 'red',padding:'5px'}}>{country}</h4>
-        <h3 style={{padding:'5px'}}>{domains}</h3>
-        <h4 style={{padding:'10px'}}><a href={web_pages}>{name}</a></h4>
-        
-
-        </ul>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell><b>Country</b></TableCell>
+                <TableCell align="middle"><b>Domain</b></TableCell>
+                <TableCell align="middle"><b>Institute&nbsp;Name</b></TableCell>
+                <TableCell align="middle"><b>Website</b></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data
+                .slice(0, 1000)
+                .map(({ name, country, domains, web_pages }) => (
+                  <TableRow
+                    key={name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {country}
+                    </TableCell>
+                    <TableCell align="middle">{domains}</TableCell>
+                    <TableCell align="middle">{name}</TableCell>
+                    <TableCell align="middle">
+                      <Link href={web_pages} color="inherit">
+                        {web_pages}
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
-    ))}  
-  </div>)
+    </div>
+  );
 }
