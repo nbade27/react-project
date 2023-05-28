@@ -18,8 +18,8 @@ return(
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="center">Usage</TableCell>
-            <TableCell align="center">URL</TableCell>
+            <TableCell align="center"><b>Usage</b></TableCell>
+            <TableCell align="center"><b>URL</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
