@@ -44,7 +44,7 @@ export default function App() {
                   <em>None</em>
                 </MenuItem>
                 <MenuItem value={"Universities"}>Universities&nbsp;to&nbsp;Study&nbsp;in&nbsp;Abroad</MenuItem>
-                <MenuItem value={"CodingSkills"}>To&nbsp;Improve&nbsp;CodingSkills</MenuItem>
+                <MenuItem value={"CodingSkills"}>Improve&nbsp;CodingSkills</MenuItem>
               </Select>
             </Link>
             &nbsp;

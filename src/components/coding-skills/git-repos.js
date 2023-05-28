@@ -1,4 +1,4 @@
-const gitRepos = [
+const GitRepos = [
     {
         "Usage": "Java Design patterns",
         "URL":"https://github.com/iluwatar/java-design-patterns"
@@ -38,7 +38,9 @@ const gitRepos = [
     {
         "Usage": "Cracking coding interviews in java",
         "URL":"https://github.com/careercup/CtCI-6th-Edition/tree/master/Java "
-    },
+    }
 ]
 
-console.log(gitRepos)
+console.log(GitRepos)
+
+export default GitRepos
