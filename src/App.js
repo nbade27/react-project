@@ -60,7 +60,7 @@ export default function App() {
         </AppBar>
       </Box>
 
-      <BrowserRouter>
+      <BrowserRouter basename="/react-project">
         <Routes>
           <Route exact path="/universities" element={<University />} />
           <Route path="/codingskills" element={<CodingSkills />} />
