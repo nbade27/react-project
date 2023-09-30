@@ -2,7 +2,7 @@
   "homepage": "https://nbade27.github.io/react-project",
   "name": "api-integration",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
