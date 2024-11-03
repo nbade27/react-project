@@ -26,19 +26,19 @@
 
 */
 
-import { useState } from "react";
-import LoadingSpinner from "../loader/LoadingSpinner";
+import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
+import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material/Paper";
+import Select from "@mui/material/Select";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
+import { useState } from "react";
+import LoadingSpinner from "../loader/LoadingSpinner";
 
 
 export default function University() {
@@ -73,7 +73,7 @@ export default function University() {
         setData([]);
         setIsLoading(false);
       })
-      .finally(() => {});
+      .finally(() => { });
   }
 
   function clearData() {
@@ -109,7 +109,7 @@ export default function University() {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>
+                <TableCell align="middle">
                   <b>Country</b>
                 </TableCell>
                 <TableCell align="middle">
