@@ -38,6 +38,9 @@ export default function MenuBar() {
     const handleOnChangeAction = (e) => {
         setOption(e.target.value)
     }
+    const handlebackButton = () => {
+        navigate("/")
+    }
 
     return (
         <>
@@ -72,9 +75,7 @@ export default function MenuBar() {
                         &nbsp;
                         <Button variant="contained" color="success" onClick={handleGoButton}>Go</Button>
                         &nbsp;
-                        <Link href="/">
-                            <Button color="error" variant="outlined">Back</Button>
-                        </Link>
+                        <Button color="error" variant="outlined" onClick={handlebackButton}>Back</Button>
                         &nbsp;
                     </Toolbar>
                 </AppBar>
