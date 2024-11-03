@@ -55,7 +55,7 @@ export default function MenuBar() {
                             sx={{ mr: 2 }}
                         ></IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            My Learnings
+                            LEARNER'S GUIDE
                         </Typography>
                         <Link href="/universities">
                             <Select
